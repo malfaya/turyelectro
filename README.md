@@ -25,7 +25,7 @@ Se agregó una configuración lista para levantar PostgreSQL en local.
    ```
 4. Conéctate con `psql`:
    ```bash
-   PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p ${POSTGRES_PORT:-5432} -U ${POSTGRES_USER:-turyelectro} -d ${POSTGRES_DB:-turyelectro}
+   PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p ${POSTGRES_PORT:-5432} -U ${POSTGRES_USER:-turyelectro} -d ${POSTGRES_DB:-AVATEL}
    ```
 
 ### Notas

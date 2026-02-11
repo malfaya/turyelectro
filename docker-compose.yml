@@ -4,7 +4,7 @@ services:
     container_name: turyelectro_postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-turyelectro}
+      POSTGRES_DB: ${POSTGRES_DB:-AVATEL}
       POSTGRES_USER: ${POSTGRES_USER:-turyelectro}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-turyelectro123}
     ports:
@@ -13,7 +13,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./db/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-turyelectro} -d ${POSTGRES_DB:-turyelectro}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-turyelectro} -d ${POSTGRES_DB:-AVATEL}"]
       interval: 10s
       timeout: 5s
       retries: 5
