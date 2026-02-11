@@ -1,37 +1,32 @@
 # turyelectro
-Repositorio de proyectos de Turyelectro
+Repositorio de proyectos de Turyelectro.
 
-## PostgreSQL local con Docker
+## PostgreSQL en modo nativo (recomendado para este entorno)
 
-Se agregó una configuración lista para levantar PostgreSQL en local.
+Se migró la guía principal a **PostgreSQL nativo** (sin Docker), porque en este entorno el daemon de Docker no puede iniciar por restricciones de red/iptables.
 
 ### Archivos incluidos
-- `docker-compose.yml`: servicio `postgres` con volumen persistente y healthcheck.
-- `.env.example`: variables de entorno de ejemplo para base, usuario, contraseña y puerto.
-- `db/init/01_init.sql`: script de inicialización con tabla `clientes` y un registro demo.
+- `.env.example`: variables de entorno para base, usuario, contraseña y puerto.
+- `db/init/01_init.sql`: script de inicialización con tabla `clientes` y registro demo.
+- `scripts/setup_postgres_native.sh`: instalación y configuración idempotente de PostgreSQL nativo.
+- `docker-compose.yml`: opción alternativa para entornos donde Docker sí funciona.
 
-### Cómo usarlo
+### Cómo usarlo (nativo)
 1. Copia variables de entorno:
    ```bash
    cp .env.example .env
    ```
-2. Levanta PostgreSQL:
+2. Ejecuta el instalador/configurador nativo:
    ```bash
-   docker compose up -d
+   sudo bash scripts/setup_postgres_native.sh
    ```
-3. Verifica estado:
+3. Prueba conexión:
    ```bash
-   docker compose ps
-   ```
-4. Conéctate con `psql`:
-   ```bash
-   PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p ${POSTGRES_PORT:-5432} -U ${POSTGRES_USER:-turyelectro} -d ${POSTGRES_DB:-AVATEL}
+   source .env
+   PGPASSWORD="$POSTGRES_PASSWORD" psql -h localhost -p "$POSTGRES_PORT" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT now();"
    ```
 
 ### Notas
-- El script en `db/init/` se ejecuta solo en la primera inicialización del volumen.
-- Si quieres reinicializar la BD desde cero:
-  ```bash
-  docker compose down -v
-  docker compose up -d
-  ```
+- El script crea/actualiza rol, crea base si no existe y ejecuta `db/init/01_init.sql`.
+- Si cambias `POSTGRES_PORT`, el script actualiza `postgresql.conf` y reinicia el servicio.
+- Puedes seguir usando `docker-compose.yml` en una máquina donde Docker daemon esté operativo.
