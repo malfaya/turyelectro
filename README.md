@@ -11,6 +11,9 @@ Se migró la guía principal a **PostgreSQL nativo** (sin Docker), porque en est
 - `scripts/setup_postgres_native.sh`: instalación y configuración idempotente de PostgreSQL nativo.
 
 ### Cómo usarlo (nativo)
+
+Valor por defecto: `POSTGRES_DB=TRANSPORTE`.
+
 1. Copia variables de entorno:
    ```bash
    cp .env.example .env
