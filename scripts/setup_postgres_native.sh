@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ENV_FILE="${ROOT_DIR}/.env"
 EXAMPLE_ENV_FILE="${ROOT_DIR}/.env.example"
-INIT_SQL="${ROOT_DIR}/db/init/01_init.sql"
+INIT_SQL_DIR="${ROOT_DIR}/db/init"
 
 if [[ ! -f "${ENV_FILE}" ]]; then
   cp "${EXAMPLE_ENV_FILE}" "${ENV_FILE}"
@@ -53,7 +53,9 @@ if ! sudo -u postgres psql -tAc "SELECT 1 FROM pg_database WHERE datname='${POST
   sudo -u postgres createdb -O "${POSTGRES_USER}" "${POSTGRES_DB}"
 fi
 
-sudo -u postgres psql -d "${POSTGRES_DB}" -f "${INIT_SQL}"
+for sql_file in "${INIT_SQL_DIR}"/*.sql; do
+  sudo -u postgres psql -d "${POSTGRES_DB}" -f "${sql_file}"
+done
 sudo -u postgres psql -d "${POSTGRES_DB}" -c "ALTER DATABASE \"${POSTGRES_DB}\" OWNER TO \"${POSTGRES_USER}\";"
 
 

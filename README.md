@@ -8,6 +8,7 @@ Se migró la guía principal a **PostgreSQL nativo** (sin Docker), porque en est
 ### Archivos incluidos
 - `.env.example`: variables de entorno para base, usuario, contraseña y puerto.
 - `db/init/01_init.sql`: script de inicialización con tabla `clientes` y registro demo.
+- `db/init/02_courier_zonas.sql`: tabla `courier_zonas` con datos de zonas por provincia.
 - `scripts/setup_postgres_native.sh`: instalación y configuración idempotente de PostgreSQL nativo.
 
 ### Cómo usarlo (nativo)
@@ -29,5 +30,5 @@ Valor por defecto: `POSTGRES_DB=TRANSPORTE`.
    ```
 
 ### Notas
-- El script crea/actualiza rol, crea base si no existe y ejecuta `db/init/01_init.sql`.
+- El script crea/actualiza rol, crea base si no existe y ejecuta todos los `*.sql` en `db/init/` en orden alfabético.
 - Si cambias `POSTGRES_PORT`, el script actualiza `postgresql.conf` y reinicia el servicio.
