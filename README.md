@@ -9,7 +9,6 @@ Se migró la guía principal a **PostgreSQL nativo** (sin Docker), porque en est
 - `.env.example`: variables de entorno para base, usuario, contraseña y puerto.
 - `db/init/01_init.sql`: script de inicialización con tabla `clientes` y registro demo.
 - `scripts/setup_postgres_native.sh`: instalación y configuración idempotente de PostgreSQL nativo.
-- `docker-compose.yml`: opción alternativa para entornos donde Docker sí funciona.
 
 ### Cómo usarlo (nativo)
 1. Copia variables de entorno:
@@ -29,4 +28,3 @@ Se migró la guía principal a **PostgreSQL nativo** (sin Docker), porque en est
 ### Notas
 - El script crea/actualiza rol, crea base si no existe y ejecuta `db/init/01_init.sql`.
 - Si cambias `POSTGRES_PORT`, el script actualiza `postgresql.conf` y reinicia el servicio.
-- Puedes seguir usando `docker-compose.yml` en una máquina donde Docker daemon esté operativo.
