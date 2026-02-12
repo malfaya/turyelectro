@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS public.courier_zonas (
+CREATE TABLE IF NOT EXISTS public."zonasDBSCHENKER" (
   cif VARCHAR(16) PRIMARY KEY,
   courier VARCHAR(80) NOT NULL,
   servicio VARCHAR(120) NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS public.courier_zonas (
   provincia VARCHAR(80) NOT NULL
 );
 
-INSERT INTO public.courier_zonas (cif, courier, servicio, codigo_pais, origen, zona, provincia)
+INSERT INTO public."zonasDBSCHENKER" (cif, courier, servicio, codigo_pais, origen, zona, provincia)
 VALUES
   ('A08363541','DBSCHENKER','Nacional System','ES','Madrid',1,'Madrid'),
   ('A08363542','DBSCHENKER','Nacional System','ES','Madrid',2,'Albacete'),

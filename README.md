@@ -8,7 +8,7 @@ Se migró la guía principal a **PostgreSQL nativo** (sin Docker), porque en est
 ### Archivos incluidos
 - `.env.example`: variables de entorno para base, usuario, contraseña y puerto.
 - `db/init/01_init.sql`: script de inicialización con tabla `clientes` y registro demo.
-- `db/init/02_courier_zonas.sql`: tabla `courier_zonas` con datos de zonas por provincia.
+- `db/init/02_courier_zonas.sql`: tabla `zonasDBSCHENKER` con datos de zonas por provincia.
 - `scripts/setup_postgres_native.sh`: instalación y configuración idempotente de PostgreSQL nativo.
 
 ### Cómo usarlo (nativo)
